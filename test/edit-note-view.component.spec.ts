@@ -59,12 +59,12 @@ const testConfig = {
     }],
   },
   error404: {
-    message: 'Http failure response for http://localhost:3000/api/v1/notes: 404 Not Found',
+    message: 'Http failure response for http://localhost:8082/api/v1/notes: 404 Not Found',
     name: 'HttpErrorResponse',
     ok: false,
     status : 404,
     statusText: 'Not Found',
-    url: 'http://localhost:3000/api/v1/notes'
+    url: 'http://localhost:8082/api/v1/notes'
   }
 };
 

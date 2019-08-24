@@ -28,7 +28,7 @@ export class SignupComponent implements OnInit {
       this.submitMessage = 'Welcome User --> ' + res['userName'] + ' Created Successfully.Proceed To Login';
     }
       , err => {
-        if (err.message === 'Http failure response for http://localhost:8084/v1/user: 409 OK') {
+        if (err.message === 'Http failure response for http://localhost:8080/v1/user: 409 OK') {
           this.submitMessage = 'User Already Exists';
           alert('User Already Exists'); // user exist then
         }

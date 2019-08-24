@@ -20,7 +20,7 @@ export class ReminderService {
   // Get reminder list from DB
   fetchRemindersFromServer() {
     if (this.authService.getUserId() !== null) {
-      this.httpClient.get<Reminder[]>(`http://localhost:8082/api/v1/reminder`, {
+      this.httpClient.get<Reminder[]>(`http://localhost:8081/api/v1/reminder`, {
         headers: new HttpHeaders().set('authorization', `Bearer ${this.authService.getBearerToken()}`)
       }).subscribe(remindersResponse => {
         this.reminders = remindersResponse;
@@ -36,7 +36,7 @@ export class ReminderService {
   // Add to DB
   addReminder(reminder: Reminder): Observable<Reminder> {
     reminder.reminderCreatedBy = this.authService.getUserId();
-    return this.httpClient.post<Reminder>('http://localhost:8082/api/v1/reminder', reminder, {
+    return this.httpClient.post<Reminder>('http://localhost:8081/api/v1/reminder', reminder, {
       headers: new HttpHeaders().set('authorization', `Bearer ${this.authService.getBearerToken()}`)
     }).do(addReminders => {
       this.reminders.push(addReminders);
@@ -45,7 +45,7 @@ export class ReminderService {
   }
   // Delete reminder from DB
   deleteReminder(reminder: Reminder) {
-    return this.httpClient.delete(`http://localhost:8082/api/v1/reminder/${reminder.reminderId}`,
+    return this.httpClient.delete(`http://localhost:8081/api/v1/reminder/${reminder.reminderId}`,
       {
         headers: new HttpHeaders().set('authorization', `Bearer ${this.authService.getBearerToken()}`)
       }).do(deleteReminder => {
@@ -67,7 +67,7 @@ export class ReminderService {
   }
   // update reminder to DB
   editReminder(reminder: Reminder): Observable<Reminder> {
-    return this.httpClient.put<Reminder>(`http://localhost:8082/api/v1/reminder/${reminder.reminderId}`, reminder, {
+    return this.httpClient.put<Reminder>(`http://localhost:8081/api/v1/reminder/${reminder.reminderId}`, reminder, {
       headers: new HttpHeaders().set('authorization', `Bearer ${this.authService.getBearerToken()}`)
     }).pipe(
       tap(editedReminder => {

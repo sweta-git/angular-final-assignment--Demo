@@ -19,7 +19,7 @@ export class NotesService {
   }
   // Get notes from DB on URL basics
   fetchNotesFromServer() {
-    this.httpClient.get<Note[]>(`http://localhost:8081/api/v1/note/${this.authService.getUserId()}`, {
+    this.httpClient.get<Note[]>(`http://localhost:8082/api/v1/note/${this.authService.getUserId()}`, {
       headers: new HttpHeaders().set('authorization', `Bearer ${this.authService.getBearerToken()}`)
     }).subscribe(notesResponse => {
       this.notes = notesResponse;
@@ -37,7 +37,7 @@ export class NotesService {
   // To add note to DB
   addNote(note: Note): Observable<Note> {
     note.noteCreatedBy = this.authService.getUserId();
-    return this.httpClient.post<Note>('http://localhost:8081/api/v1/note', note, {
+    return this.httpClient.post<Note>('http://localhost:8082/api/v1/note', note, {
       headers: new HttpHeaders().set('authorization', `Bearer ${this.authService.getBearerToken()}`)
     }).do(addNotes => { // adding behaviour subject while in addnotes
       this.notes.push(addNotes);
@@ -46,7 +46,7 @@ export class NotesService {
   }
   // update note to DB
   editNote(note: Note): Observable<Note> {
-    return this.httpClient.put<Note>(`http://localhost:8081/api/v1/note/${this.authService.getUserId()}/${note.noteId}`, note, {
+    return this.httpClient.put<Note>(`http://localhost:8082/api/v1/note/${this.authService.getUserId()}/${note.noteId}`, note, {
       headers: new HttpHeaders().set('authorization', `Bearer ${this.authService.getBearerToken()}`)
     }).pipe(
       tap(editeNote => {
@@ -67,7 +67,7 @@ export class NotesService {
   }*/
   // For delete notes from mongo DB
   deleteNote(noteId) {
-    return this.httpClient.delete(`http://localhost:8081/api/v1/note/${this.authService.getUserId()}/${noteId}`,
+    return this.httpClient.delete(`http://localhost:8082/api/v1/note/${this.authService.getUserId()}/${noteId}`,
       {
         headers: new HttpHeaders().set('authorization', `Bearer ${this.authService.getBearerToken()}`)
       }).do(deleteNote => {
