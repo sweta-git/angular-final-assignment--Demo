@@ -44,7 +44,7 @@ export class AppComponent implements OnInit {
   addCategory() {
     if (this.authService.getBearerToken() !== null) {
       this.authService.isUserValid(this.authService.getBearerToken()).subscribe(res => {
-        if (res['isAuthenticated'] === 'true') { // For postive case check and then note view
+        if (res['isAuthenticated'] === true) { // For postive case check and then note view
           this.dialog.open(CreateCategoryComponent, {}).afterClosed().subscribe(result => {
             this.routerService.routeToNoteView();
           });
@@ -77,7 +77,7 @@ export class AppComponent implements OnInit {
   addReminder() {
     if (this.authService.getBearerToken() !== null) {
       this.authService.isUserValid(this.authService.getBearerToken()).subscribe(res => {
-        if (res['isAuthenticated'] === 'true') { // For postive case check and then note view
+        if (res['isAuthenticated'] === true) { // For postive case check and then note view
           this.dialog.open(CreateReminderComponent, {}).afterClosed().subscribe(result => {
             this.routerService.routeToNoteView();
           });
