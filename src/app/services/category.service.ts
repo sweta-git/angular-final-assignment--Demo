@@ -20,7 +20,7 @@ export class CategoryService {
   // To get all category list from mongo DB
   fetchCategoriesFromServer() {
     if (this.authService.getUserId() !== null) {
-      this.httpClient.get<Category[]>(`http://localhost:8080/api/v1/category/user/${this.authService.getUserId()}`, {
+      this.httpClient.get<Category[]>(`http://localhost:8083/api/v1/category/user/${this.authService.getUserId()}`, {
         headers: new HttpHeaders().set('authorization', `Bearer ${this.authService.getBearerToken()}`)
       }).subscribe(categoriesResponse => {
         this.categories = categoriesResponse;
@@ -41,7 +41,7 @@ export class CategoryService {
   // Add category to DB
   addCategory(category: Category): Observable<Category> {
     category.categoryCreatedBy = this.authService.getUserId();
-    return this.httpClient.post<Category>('http://localhost:8080/api/v1/category', category, {
+    return this.httpClient.post<Category>('http://localhost:8083/api/v1/category', category, {
       headers: new HttpHeaders().set('authorization', `Bearer ${this.authService.getBearerToken()}`)
     }).do(addCategories => {
       this.categories.push(addCategories);
@@ -50,7 +50,7 @@ export class CategoryService {
   }
   // Delete category from DB
   deleteCategory(category: Category) {
-    return this.httpClient.delete(`http://localhost:8080/api/v1/category/${category.id}`,
+    return this.httpClient.delete(`http://localhost:8083/api/v1/category/${category.id}`,
       {
         headers: new HttpHeaders().set('authorization', `Bearer ${this.authService.getBearerToken()}`)
       }).do(deleteCategory => {
@@ -61,14 +61,14 @@ export class CategoryService {
   }
 
   getCategoryById(category: Category) {
-    return this.httpClient.get<Category>(`http://localhost:8080/api/v1/category/${category.id}`,
+    return this.httpClient.get<Category>(`http://localhost:8083/api/v1/category/${category.id}`,
       {
         headers: new HttpHeaders().set('authorization', `Bearer ${this.authService.getBearerToken()}`)
       });
   }
   // Update category to DB
   editCategory(category: Category): Observable<Category> {
-    return this.httpClient.put<Category>(`http://localhost:8080/api/v1/category/${category.id}`, category, {
+    return this.httpClient.put<Category>(`http://localhost:8083/api/v1/category/${category.id}`, category, {
       headers: new HttpHeaders().set('authorization', `Bearer ${this.authService.getBearerToken()}`)
     }).pipe(
       tap(editedCategory => {
