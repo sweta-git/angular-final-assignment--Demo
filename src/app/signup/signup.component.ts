@@ -24,11 +24,12 @@ export class SignupComponent implements OnInit {
   ngOnInit() { }
 
   signUpUser(signUpForm: NgForm) {
+       this.userName=signUpForm.controls['firstName'].value;   
     this.userService.registerUserService(signUpForm.value).subscribe(res => {
-      this.submitMessage = 'Welcome User --> ' + res['userName'] + ' Created Successfully.Proceed To Login';
+      this.submitMessage = 'Welcome User --> ' + this.userName + ' Created Successfully.Proceed To Login';
     }
       , err => {
-        if (err.message === 'Http failure response for http://localhost:8080/v1/user: 409 OK') {
+        if (err.message === 'Http failure response for http://localhost:8080/api/v1/user: 409 OK') {
           this.submitMessage = 'User Already Exists';
           alert('User Already Exists'); // user exist then
         }

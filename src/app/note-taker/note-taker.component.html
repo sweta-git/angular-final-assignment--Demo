@@ -21,6 +21,15 @@
         <mat-form-field>
           <textarea matInput placeholder="Text" [(ngModel)]="note.noteContent" name="text"></textarea>
         </mat-form-field>
+        
+          <mat-form-field>
+    <mat-select name="addStatus" placeholder="Select state" [(ngModel)]="note.noteStatus">
+      <mat-option *ngFor="let state of states" [value]="state">
+        {{ state }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+    
 
         <mat-form-field>
           <mat-select matInput placeholder="Category" [(ngModel)]="category.id">

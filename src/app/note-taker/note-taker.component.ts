@@ -15,6 +15,7 @@ import { FormControl } from '@angular/forms';
 export class NoteTakerComponent implements OnInit {
 
   errMessage: string;
+  states: Array<string> = ['not-started', 'started', 'completed'];
   notes: Note[];
   note: Note;
   category: Category;
@@ -66,11 +67,11 @@ export class NoteTakerComponent implements OnInit {
       }
     }
     // Adding empty validation when click on Done button
-    if (this.note.noteTitle === '' && this.note.noteContent === '') {
+    if (this.note.noteTitle === '' && this.note.noteContent === '' && this.note.noteStatus === '') {
       this.errMessage = 'Title and Text both are required fields';
     }
     // To check whether user entered text or not and allow user to create note
-    if (this.note.noteTitle !== '' && this.note.noteContent !== '') {
+    if (this.note.noteTitle !== '' && this.note.noteContent !== '' && this.note.noteStatus !== '') {
       this.errMessage = ''; // This all clear the error message when new note added successfully
       this.note.noteStatus = 'not-started';
 
@@ -84,6 +85,7 @@ export class NoteTakerComponent implements OnInit {
       this.note = new Note();
       this.note.noteTitle = ''; // This all clear the fields when new note added successfully
       this.note.noteContent = '';
+       this.note.noteStatus = '';
     }
   }
 }
