@@ -73,7 +73,6 @@ export class NoteTakerComponent implements OnInit {
     // To check whether user entered text or not and allow user to create note
     if (this.note.noteTitle !== '' && this.note.noteContent !== '' && this.note.noteStatus !== '') {
       this.errMessage = ''; // This all clear the error message when new note added successfully
-      this.note.noteStatus = 'not-started';
 
       this.noteService.addNote(this.note).subscribe(addedNote => {
         this.remindersForNote = [];
