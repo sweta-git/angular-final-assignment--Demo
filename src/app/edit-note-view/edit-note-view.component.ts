@@ -52,7 +52,9 @@ export class EditNoteViewComponent implements OnDestroy {
     if (this.note.reminders !== null) {
       if (this.note.reminders.length > 0) {
         for (const rem of this.note.reminders) {
+        if(rem.reminderName !==null){
           this.selectedReminders.push(rem.reminderName);
+          }
         }
       }
     }
@@ -73,7 +75,7 @@ export class EditNoteViewComponent implements OnDestroy {
         this.note.reminders = this.remindersForNote;
       }
     }
-
+ alert('this.note.noteStatus'+this.note.noteStatus);
     let editedNote: Note;
     editedNote = new Note();
     editedNote.noteId = this.note.noteId;
