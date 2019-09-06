@@ -56,7 +56,7 @@ export class ReminderService {
   }
   // Get reminder based on ID
   getReminderById(reminder: Reminder) {
-    return this.httpClient.get<Reminder>(`http://localhost:8082/api/v1/reminder/${reminder.id}`,
+    return this.httpClient.get<Reminder>(`http://localhost:8081/api/v1/reminder/${reminder.id}`,
       {
         headers: new HttpHeaders().set('authorization', `Bearer ${this.authService.getBearerToken()}`)
       });
